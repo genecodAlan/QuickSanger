@@ -3,6 +3,25 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Ignore virtual envs
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# IDE/project settings
+.vscode/
+.idea/
+.DS_Store
+
+# Output files
+manual_check_required/
+merged/
+aligned_files/
+
+
 # C extensions
 *.so
 
