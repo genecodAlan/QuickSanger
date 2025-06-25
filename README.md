@@ -1,22 +1,22 @@
-# Quickalign
+# Quickalign 🧬📈
 Raw Sanger sequence alignment and merging. Auto gap and mismatch corrections based on AB1 chromatogram file confidence scores. Features batch and single alignment, as well as batch or single merge. Bioinformatics tool for rapid Sanger analysis
 
-# Installation & Setup
+## Installation & Setup ⬇️
 
-## 1. Clone the repository
+### 1. Clone the repository
 git clone https://github.com/genecodAlan/Quickalign.git
 cd Quickalign
 
-## 2. (Optional) Create a virtual environment
+### 2. (Optional) Create a virtual environment
 python -m venv venv
 venv\Scripts\activate   # On Windows
-## or
+### or
 source venv/bin/activate  # On Mac/Linux
 
-## 3. Install required packages
+### 3. Install required packages
 pip install -r requirements.txt
 
-## 4. Run the script
+### 4. Run the script
 python main.py
 Outputs (aligned or merged sequences) will be automatically saved in aligned_files/, merged/, or manual_check_required/.
 
@@ -24,7 +24,7 @@ Quickalign or AlanView :)
 Fast batch and single Sanger sequence alignment and merging.
 Auto gap and mismatch corrections are based on AB1 chromatogram confidence scores.
 
- --Features--
+## Features 😲
 - Single or batch mode for alignment and merging
 
 - Auto reverse complementing of reverse reads
