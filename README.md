@@ -1,7 +1,7 @@
 # QuickSanger 🧬📈
 Raw Sanger sequence alignment and merging. Auto gap and mismatch corrections based on AB1 chromatogram file confidence scores. Features batch and single alignment, as well as batch or single merge. Bioinformatics tool for rapid Sanger analysis---automatic alternative to Aliview---AlanView :)
 
-## Features 😲
+## Features 🛠️
 - Single or batch mode for alignment and merging
 
 - Auto reverse complementing of reverse reads
