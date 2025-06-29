@@ -134,7 +134,7 @@ def correct_and_clean_alignment(alignment, conf_seq1, conf_seq2, offset_A, offse
     index_map_A = build_index_map(seqA)
     index_map_B = build_index_map(seqB)
 
-    # Find overlap boundaries (first and last aligned positions) so only checking for gaps within reigon and not overhangs 
+    # Find overlap boundaries (first and last aligned positions) so only checking for gaps within region and not overhangs 
     first_aligned_pos = next(i for i, (a, b) in enumerate(zip(seqA, seqB)) if a != '-' and b != '-')
     last_aligned_pos = len(seqA) - 1 - next(i for i, (a, b) in enumerate(zip(reversed(seqA), reversed(seqB))) if a != '-' and b != '-')
 
@@ -181,20 +181,34 @@ def correct_and_clean_alignment(alignment, conf_seq1, conf_seq2, offset_A, offse
     corrected_seqA = ''.join(seqA)
     corrected_seqB = ''.join(seqB)
 
+    #Recalculate for adjusted positions (updated code)
+    first_aligned_pos_2 = next(i for i, (a, b) in enumerate(zip(corrected_seqA, corrected_seqB)) if a != '-' and b != '-')
+    last_aligned_pos_2 = len(seqA) - 1 - next(i for i, (a, b) in enumerate(zip(reversed(corrected_seqA), reversed(corrected_seqB))) if a != '-' and b != '-')
+
     # Only check for final gaps within the overlap region if manual check needed
-    overlapA = corrected_seqA[first_aligned_pos:last_aligned_pos+1]
-    overlapB = corrected_seqB[first_aligned_pos:last_aligned_pos+1]
+    overlapA = corrected_seqA[first_aligned_pos_2:last_aligned_pos_2+1]
+    overlapB = corrected_seqB[first_aligned_pos_2:last_aligned_pos_2+1]
     if '-' in overlapA or '-' in overlapB:
         os.makedirs('manual_check_required', exist_ok=True)
         file_index = len(os.listdir('manual_check_required')) // 2 + 1  # count pairs
 
-        with open(f'manual_check_required/sample_{file_index}_seqA.fasta', 'w') as f:
-            f.write(f">Corrected_SeqA_Sample_{file_index}\n{corrected_seqA}\n")
+        # Find gap indices in overlap region (relative to overlap)
+        gap_indices_A = [i for i, base in enumerate(overlapA) if base == '-']
+        gap_indices_B = [i for i, base in enumerate(overlapB) if base == '-']
 
-        with open(f'manual_check_required/sample_{file_index}_seqB.fasta', 'w') as f:
-            f.write(f">Corrected_SeqB_Sample_{file_index}\n{corrected_seqB}\n")
+        # Convert to indices relative to full sequence
+        gap_indices_A_full = [first_aligned_pos + i for i in gap_indices_A]
+        gap_indices_B_full = [first_aligned_pos + i for i in gap_indices_B]
+
+        with open(f'manual_check_required/sample_{file_index}_seq.fasta', 'w') as f:
+           f.write(f">Corrected_SeqA_Sample_{file_index}\n{corrected_seqA}\n")
+           f.write(f">Corrected_SeqB_Sample_{file_index}\n{corrected_seqB}\n")
 
         print(f"\nWarning: Gaps remain in overlap. Sequences saved to manual_check_required/sample_{file_index}_seqA.fasta and seqB.fasta")
+        if gap_indices_A_full:
+            print(f"Gap(s) in seqA at indices: {gap_indices_A_full}")
+        if gap_indices_B_full:
+            print(f"Gap(s) in seqB at indices: {gap_indices_B_full}")
 
     return corrected_seqA, corrected_seqB
 
