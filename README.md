@@ -1,4 +1,4 @@
-# QuickSanger 🧬📈
+# QuickSanger!
 Raw Sanger sequence alignment and merging. Auto gap and mismatch corrections based on AB1 chromatogram file confidence scores. Features batch and single alignment, as well as batch or single merge. Bioinformatics tool for rapid Sanger analysis---automatic alternative to Aliview---AlanView :)
 
 ## Features 🛠️
@@ -6,19 +6,16 @@ Raw Sanger sequence alignment and merging. Auto gap and mismatch corrections bas
 
 - Auto reverse complementing of reverse reads
 
-🧬 Local alignment using Biopython
+ Local alignment using Biopython
 
-✨ Auto-correction of:
-
-Mismatches
-
-Gaps (based on chromatogram confidence)
-
-AB1 confidence score-based corrections using customizable thresholds
+Auto-correction of:
+- Mismatches
+- Gaps (based on chromatogram confidence)
+- AB1 confidence score-based corrections using customizable thresholds
 
 ⚠️ Unresolvable cases sent to manual_check_required/ for manual curation
 
-# 🔁 Pipeline Overview
+# Pipeline Overview
 ## 1. Input
 Input must include:
 
@@ -74,7 +71,7 @@ merged/: Merged consensus sequences
 
 manual_check_required/: Problematic sequences needing manual inspection
 
-🧬 Example Output FASTA (from aligned_files/)
+Example Output FASTA (from aligned_files/)
 
 ![image](https://github.com/user-attachments/assets/6579ab3f-e5f8-482a-bc05-de4d1555fd23)
 
